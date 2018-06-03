@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a44a7266-44a7-4494-8fa3-f742f7313fe6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaInicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFin" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[select c.nombre as cliente, pa.nombre as pais, ve.nombre as vendedor,
+v.fechaEnvio, p.nombre as producto, v.cantidad, v.monto
+from ventas v
+join clientes c
+on c.idcliente = v.idcliente
+join pais pa
+on pa.idpais = v.idpais
+join vendedores ve
+on ve.idvendedor = v.idvendedor
+join productos p
+on p.idproducto = v.idproducto
+where v.fechaEnvio between $P{fechaInicio} and $P{fechaFin}]]>
+	</queryString>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="pais" class="java.lang.String"/>
+	<field name="vendedor" class="java.lang.String"/>
+	<field name="fechaEnvio" class="java.sql.Timestamp"/>
+	<field name="producto" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Integer"/>
+	<field name="monto" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="2c1fd26d-d03f-4910-b9f1-f29c2e533033" x="202" y="16" width="161" height="20"/>
+				<textElement/>
+				<text><![CDATA[PRODUCTOS VENDIDOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ac705f82-0977-456d-9903-7cf19421b9a5" x="126" y="49" width="287" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Desde " + $P{fechaInicio} + " hasta " + $P{fechaFin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b0363dd2-30e9-4807-838f-c4210dfe9885" x="0" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="336d932a-7dcb-449d-bbd6-6d23da54714a" x="79" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[Pais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="32acb89f-2e0d-4292-85a6-7b2e27418a63" x="158" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[Vendedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9961e1b-9874-424a-a96d-48a3a23f3a33" x="237" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha Envio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e0090896-dec7-4274-b78c-651c8199a4f7" x="316" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d128d498-2c05-46d3-a01e-7eb393727a5e" x="395" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="357710a0-9333-449b-ba7a-961ea19b4a26" x="474" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="719d406b-ef1e-4c13-a32a-ef77f894f33e" x="0" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f4969441-f9da-410a-92f5-18ae430697f6" x="79" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pais}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bb599744-489b-47c0-ba68-2a175d7ee5a9" x="158" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="efe30851-a8da-47a3-8769-5e9adc28133b" x="237" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fechaEnvio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="af7fdb06-ed09-4d33-8251-deb71486f6dd" x="316" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5b29f289-83cc-4dfb-996f-abbbaf6fed25" x="395" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="27ebe857-c5d7-48a5-98ce-6ca90a776cfd" x="474" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

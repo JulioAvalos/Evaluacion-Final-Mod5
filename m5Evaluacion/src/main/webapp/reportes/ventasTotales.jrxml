@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ventasTotales" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad4a3560-6e44-4f39-9a12-1dc56a047cd8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select c.nombre as cliente, pa.nombre as pais, ve.nombre as vendedor,
+v.fechaEnvio, p.nombre as producto, v.cantidad, v.monto
+from ventas v
+join clientes c
+on c.idcliente = v.idcliente
+join pais pa
+on pa.idpais = v.idpais
+join vendedores ve
+on ve.idvendedor = v.idvendedor
+join productos p
+on p.idproducto = v.idproducto]]>
+	</queryString>
+	<field name="fecha" class="java.sql.Timestamp"/>
+	<field name="idusuario" class="java.lang.Integer"/>
+	<field name="origen" class="java.lang.String"/>
+	<field name="destino" class="java.lang.String"/>
+	<field name="nboletos" class="java.lang.Integer"/>
+	<field name="precio" class="java.math.BigDecimal"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="pais" class="java.lang.String"/>
+	<field name="vendedor" class="java.lang.String"/>
+	<field name="fechaEnvio" class="java.sql.Timestamp"/>
+	<field name="producto" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Integer"/>
+	<field name="monto" class="java.math.BigDecimal"/>
+	<group name="pais">
+		<groupExpression><![CDATA[$F{pais}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<staticText>
+					<reportElement uuid="23409551-bbf1-493d-8748-1d5cf548c925" mode="Opaque" x="30" y="0" width="100" height="20" backcolor="#66CCFF"/>
+					<textElement/>
+					<text><![CDATA[pais]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="359bbaa8-72b7-418e-8d9a-17244df75231" x="130" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{pais}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f227303b-1874-4f02-b555-f289a20365ac" x="68" y="22" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Aerolinea Project]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="43768200-f6e7-437f-810c-b574837523f0" x="450" y="2" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="afec4793-9b12-4956-96ba-d51838fa05bd" x="116" y="42" width="153" height="20"/>
+				<textElement/>
+				<text><![CDATA[A project for learning]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="904afcc3-ea41-40c3-87ad-fa1328489ff3" x="427" y="22" width="128" height="51"/>
+				<imageExpression><![CDATA["logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<line>
+				<reportElement uuid="12070272-a3f6-4c74-be96-d0e0a27cc480" x="0" y="20" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="23409551-bbf1-493d-8748-1d5cf548c925" mode="Opaque" x="0" y="0" width="92" height="20" backcolor="#9999FF"/>
+				<textElement/>
+				<text><![CDATA[cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="23409551-bbf1-493d-8748-1d5cf548c925" mode="Opaque" x="92" y="0" width="92" height="20" backcolor="#9999FF"/>
+				<textElement/>
+				<text><![CDATA[vendedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="23409551-bbf1-493d-8748-1d5cf548c925" mode="Opaque" x="184" y="0" width="92" height="20" backcolor="#9999FF"/>
+				<textElement/>
+				<text><![CDATA[fechaEnvio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="23409551-bbf1-493d-8748-1d5cf548c925" mode="Opaque" x="276" y="0" width="92" height="20" backcolor="#9999FF"/>
+				<textElement/>
+				<text><![CDATA[producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="23409551-bbf1-493d-8748-1d5cf548c925" mode="Opaque" x="368" y="0" width="92" height="20" backcolor="#9999FF"/>
+				<textElement/>
+				<text><![CDATA[cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="23409551-bbf1-493d-8748-1d5cf548c925" mode="Opaque" x="460" y="0" width="92" height="20" backcolor="#9999FF"/>
+				<textElement/>
+				<text><![CDATA[monto]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="359bbaa8-72b7-418e-8d9a-17244df75231" x="0" y="0" width="92" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="359bbaa8-72b7-418e-8d9a-17244df75231" x="92" y="0" width="92" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="359bbaa8-72b7-418e-8d9a-17244df75231" x="184" y="0" width="92" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fechaEnvio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="359bbaa8-72b7-418e-8d9a-17244df75231" x="276" y="0" width="92" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="359bbaa8-72b7-418e-8d9a-17244df75231" x="368" y="0" width="92" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="359bbaa8-72b7-418e-8d9a-17244df75231" x="460" y="0" width="92" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement uuid="63a738d3-4380-4a2c-9f3f-ad8c85674a1b" x="430" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="0c0e5b9b-4186-4db4-a5c8-d5b5abcabdf6" x="510" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6ff0547e-c91f-46cf-9b0f-5545fc9bc389" x="168" y="20" width="215" height="29"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[UNIVERSIDAD DON BOSCO
+CENTRO DE ESTUDIOS DE POSTGRADOS]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

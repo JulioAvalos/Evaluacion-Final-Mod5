@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportVentas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a4f95e6a-3d48-469c-ac21-416321d5fb78">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaInicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFin" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[select c.nombre as cliente, pa.nombre as pais, ve.nombre as vendedor,
+DATE_FORMAT(v.fechaEnvio, "%d/%m/%Y") as fechaEnvio, p.nombre as producto, v.cantidad, v.cantidad * p.precio as monto
+from ventas v
+join clientes c
+on c.idcliente = v.idcliente
+join pais pa
+on pa.idpais = v.idpais
+join vendedores ve
+on ve.idvendedor = v.idvendedor
+join productos p
+on p.idproducto = v.idproducto
+where v.fechaEnvio between $P{fechaInicio} and $P{fechaFin}]]>
+	</queryString>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="pais" class="java.lang.String"/>
+	<field name="vendedor" class="java.lang.String"/>
+	<field name="fechaEnvio" class="java.lang.String"/>
+	<field name="producto" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Integer"/>
+	<field name="monto" class="java.math.BigDecimal"/>
+	<variable name="montoTotal" class="java.lang.Double" resetType="Group" resetGroup="pais" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto}]]></variableExpression>
+	</variable>
+	<group name="pais">
+		<groupExpression><![CDATA[$F{pais}]]></groupExpression>
+		<groupFooter>
+			<band height="25">
+				<line>
+					<reportElement uuid="a70aaf9c-124a-4d22-ad44-cbe609144220" x="2" y="0" width="553" height="1"/>
+				</line>
+				<textField>
+					<reportElement uuid="81a04071-5c40-4b2b-9e98-656f31d99669" x="453" y="4" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA["$" + $V{montoTotal}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="6fc198f1-e064-4e2e-ba41-4aef9963b454" x="342" y="4" width="100" height="20"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[Total Venta ]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="54ee04b6-a603-46ae-b26f-c225528162b5" x="0" y="0" width="553" height="44"/>
+				<textElement textAlignment="Center">
+					<font size="28"/>
+				</textElement>
+				<text><![CDATA[VENTA POR PAISES]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f2a8172d-6581-47f8-8714-f1cf1bb8f9c7" mode="Opaque" x="0" y="0" width="79" height="20" backcolor="#FF9966"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b2b1f2f6-3dee-431e-966b-5418620daecf" mode="Opaque" x="79" y="0" width="79" height="20" backcolor="#FF9966"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Pais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2adbef3d-c687-4051-8725-a15ca9b292b0" mode="Opaque" x="158" y="0" width="79" height="20" backcolor="#FF9966"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Vendedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="968e62a7-f9bc-4647-8dfc-6275a963a4b9" mode="Opaque" x="237" y="0" width="79" height="20" backcolor="#FF9966"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Fecha de Envio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="85673c49-04d8-4e33-9556-b82997bf8a8c" mode="Opaque" x="316" y="0" width="79" height="20" backcolor="#FF9966"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="feeb7f1f-744f-41ee-b6cd-d42858660829" mode="Opaque" x="395" y="0" width="79" height="20" backcolor="#FF9966"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9e30ace-dae6-47e4-9605-53bf781536c2" mode="Opaque" x="474" y="0" width="79" height="20" backcolor="#FF9966"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="810eaaab-4d4d-41c5-b64e-daac59c9b6ea" x="2" y="0" width="77" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1efda4c1-d54a-4653-9d08-a2ee588bbe79" x="79" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{pais}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9fa1df55-502e-4bfe-ac02-5c5a66d07053" x="158" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9eaa5d7d-80ec-47d3-8f1a-aefb2ebb8a36" x="237" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fechaEnvio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2044a6e6-2009-4871-ad7e-02fbcd29da1e" x="316" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e4654ae0-8145-4322-b7e5-c045937fb233" x="395" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8c1b4589-4c3f-4e66-b487-91bfa0d61171" x="474" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["$" + $F{monto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
