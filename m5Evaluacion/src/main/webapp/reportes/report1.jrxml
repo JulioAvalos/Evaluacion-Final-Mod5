@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportVentas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a4f95e6a-3d48-469c-ac21-416321d5fb78">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportVentas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a4f95e6a-3d48-469c-ac21-416321d5fb78">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -38,15 +38,15 @@ where v.fechaEnvio between $P{fechaInicio} and $P{fechaFin}]]>
 				<line>
 					<reportElement uuid="a70aaf9c-124a-4d22-ad44-cbe609144220" x="2" y="0" width="553" height="1"/>
 				</line>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="81a04071-5c40-4b2b-9e98-656f31d99669" x="453" y="4" width="100" height="20"/>
 					<textElement/>
-					<textFieldExpression><![CDATA["$" + $V{montoTotal}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{montoTotal} ]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement uuid="6fc198f1-e064-4e2e-ba41-4aef9963b454" x="342" y="4" width="100" height="20"/>
 					<textElement textAlignment="Right"/>
-					<text><![CDATA[Total Venta ]]></text>
+					<text><![CDATA[Total Venta  $]]></text>
 				</staticText>
 			</band>
 		</groupFooter>
